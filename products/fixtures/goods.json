@@ -1,0 +1,74 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "name": "Худи черного цвета с монограммами adidas Originals",
+        "description": "Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.",
+        "price": "6090.00",
+        "quantity": 10,
+        "image": "products_images/Tnf.png",
+        "category": 1
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "name": "Синяя куртка The North Face",
+        "description": "Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.",
+        "price": "8500.00",
+        "quantity": 15,
+        "image": "products_images/синия_куртка.png",
+        "category": 1
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "name": "Серый спортивный oversized-топ ASOS DESIGN",
+        "description": "Материал с плюшевой текстурой. Удобный и мягкий.",
+        "price": "3390.00",
+        "quantity": 2500,
+        "image": "products_images/серый_костю.png",
+        "category": 3
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "name": "Черный рюкзак Nike Heritage",
+        "description": "Плотная ткань. Легкий материал.",
+        "price": "2340.00",
+        "quantity": 5,
+        "image": "products_images/рюкзак.png",
+        "category": 4
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "name": "Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex",
+        "description": "Гладкий кожаный верх. Натуральный материал.",
+        "price": "7500.00",
+        "quantity": 12,
+        "image": "products_images/туфли.jpg",
+        "category": 2
+    }
+},
+{
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "name": "Темно-синие широкие строгие брюки ASOS DESIGN",
+        "description": "Легкая эластичная ткань сирсакер Фактурная ткань.",
+        "price": "3200.00",
+        "quantity": 25,
+        "image": "products_images/брюки.png",
+        "category": 1
+    }
+}
+]
