@@ -21,4 +21,6 @@ class EmailVerificationAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'email')
+    fields = ('first_name', 'last_name', 'email', 'content')
+    ordering = ('first_name',)
 

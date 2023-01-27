@@ -2,7 +2,12 @@ from django.contrib import admin
 
 from .models import Basket, Product, ProductCategory
 
-admin.site.register(ProductCategory)
+
+@admin.register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    fields = ('name', 'description')
+    ordering = ('name', )
 
 
 @admin.register(Product)
