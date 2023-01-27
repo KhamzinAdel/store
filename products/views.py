@@ -31,7 +31,7 @@ class ProductsListView(TitleMixin, ListView):
 
 @login_required
 def basket_add(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, pk=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
 
     if not baskets.exists():
@@ -46,6 +46,6 @@ def basket_add(request, product_id):
 
 @login_required
 def basket_remove(request, basket_id):
-    basket = get_object_or_404(Basket, id=basket_id)
+    basket = get_object_or_404(Basket, pk=basket_id)
     basket.delete()
     return redirect(request.META['HTTP_REFERER'])
