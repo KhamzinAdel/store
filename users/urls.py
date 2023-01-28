@@ -11,5 +11,6 @@ urlpatterns = [
     path('profile/<int:pk>', views.UserProfileView.as_view(), name='profile'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('contact/', views.ContactFormView.as_view(), name='contact'),
+    path('reviews/', views.ReviewView.as_view(), name='reviews'),
     path('verify/<str:email>/<uuid:code>/', views.EmailVerificationView.as_view(), name='email_verification'),
 ]
