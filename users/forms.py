@@ -8,7 +8,7 @@ from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
 from django.forms import ModelForm
 from django.utils.timezone import now
 
-from .models import Contact, EmailVerification, User
+from .models import Contact, EmailVerification, User, Reviews
 
 
 class UserLoginForm(AuthenticationForm):
@@ -70,3 +70,12 @@ class ContactForm(ModelForm):
     class Meta:
         model = Contact
         fields = ('first_name', 'last_name', 'email', 'content')
+
+
+class ReviewsForm(ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control py-4', 'cols': 16, 'rows': 4}))
+
+    class Meta:
+        model = Reviews
+        fields = ('name', 'text', 'user')
