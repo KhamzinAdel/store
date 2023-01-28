@@ -64,9 +64,14 @@ class Contact(models.Model):
         return self.email
 
 
+class Reviews(models.Model):
+    name = models.CharField(max_length=100)
+    text = models.TextField()
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
 
-
-
-
-
+    def __str__(self):
+        return self.user.username
