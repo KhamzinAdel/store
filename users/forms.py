@@ -69,7 +69,7 @@ class ContactForm(ModelForm):
 
     class Meta:
         model = Contact
-        fields = ('first_name', 'last_name', 'email', 'content')
+        fields = ('first_name', 'last_name', 'email', 'content', 'captcha')
 
 
 class ReviewsForm(ModelForm):
