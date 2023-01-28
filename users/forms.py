@@ -1,7 +1,7 @@
 import uuid
 from datetime import timedelta
 
-from captcha.fields import CaptchaField, CaptchaTextInput
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)

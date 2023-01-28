@@ -56,8 +56,16 @@ class Contact(models.Model):
     email = models.EmailField(unique=True, blank=False)
     content = models.TextField()
 
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
+
     def __str__(self):
         return self.email
+
+
+
+
 
 
 
