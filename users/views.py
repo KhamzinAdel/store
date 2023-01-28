@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -9,8 +9,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from products.utils import TitleMixin
 
 from .forms import (ContactForm, UserLoginForm, UserProfileForm,
-                    UserRegistrationForm)
-from .models import Contact, EmailVerification, User
+                    UserRegistrationForm, ReviewsForm)
+from .models import Contact, EmailVerification, User, Reviews
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -65,3 +65,17 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return super().get(request, *args, **kwargs)
         else:
             return redirect('index')
+
+
+class ReviewView(TitleMixin, SuccessMessageMixin, CreateView):
+    model = Reviews
+    form_class = ReviewsForm
+    template_name = 'users/reviews.html'
+    success_url = reverse_lazy('users:reviews')
+    success_message = 'Отзыв отправлен'
+    title = 'Отзывы'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['reviews'] = Reviews.objects.all()
+        return context
