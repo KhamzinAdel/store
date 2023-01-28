@@ -1,0 +1,83 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        {% if form.errors %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                             style="margin-top: 50px;">
+                            {{ form.errors }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header"><h3 class="text-center font-weight-light my-3">Написать отзыв</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="{% url 'users:reviews' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for={{ form.name.id_for_label }}>Имя</label>
+                                                {{ form.name }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for={{ form.user.id_for_label }}>Имя пользователя</label>
+                                                {{ form.user }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for={{ form.text.id_for_label }}>Написать отзыв</label>
+                                            {{ form.text }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-0 mb-0">
+                                        <input class="btn btn-primary btn-block" type="submit" value="Отправить">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+<section>
+  <div class="container my-5 py-5 text-dark">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-11 col-lg-9 col-xl-7">
+      {% for review in reviews %}
+        <div class="d-flex flex-start mb-4">
+           <img width="130" height="100"
+                         src="{% if review.user.image %} {{ review.user.image.url }} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}"
+                         class="img-thumbnail">
+          <div class="card w-100">
+            <div class="card-body p-4">
+              <div class="">
+                <h5>{{ review.name }}</h5>
+                <p>
+                  {{ review.text }}
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                  </div>
+                  <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i> Ответить</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endfor %}
+
+{% endblock %}
