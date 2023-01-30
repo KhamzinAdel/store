@@ -59,12 +59,11 @@
                 </div>
             </div>
         </main>
-
-
-<section>
+    <section>
   <div class="container my-5 py-5 text-dark">
     <div class="row d-flex justify-content-center">
       <div class="col-md-11 col-lg-9 col-xl-7">
+      <h4>Всего комментариев: {{ count_review }}</h4>
       {% for review in reviews %}
         <div class="d-flex flex-start mb-4">
            <img width="130" height="100"
