@@ -78,4 +78,5 @@ class ReviewView(TitleMixin, SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['reviews'] = Reviews.objects.all()
+        context['count_review'] = Reviews.objects.count()
         return context
