@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from users.models import User
 
@@ -10,6 +11,9 @@ class ProductCategory(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+
+    def get_absolute_url(self):
+        return reverse('products:category', kwargs={'category_id': self.pk})
 
     def __str__(self):
         return self.name
@@ -49,6 +53,10 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'Корзина для {self.user.email} │ Продукт: {self.product.name}'
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
 
     def sum(self):
         return self.product.price * self.quantity
