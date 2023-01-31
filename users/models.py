@@ -53,7 +53,7 @@ class EmailVerification(models.Model):
 class Contact(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True, blank=False)
+    email = models.EmailField(blank=False)
     content = models.TextField()
 
     class Meta:
