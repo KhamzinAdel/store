@@ -65,3 +65,14 @@ class ContactFormViewTestCase(TestCase):
         self.assertEqual(response.context_data['title'], 'Обратная связь')
         self.assertTemplateUsed(response, 'users/contact.html')
 
+
+class ReviewViewTestCase(TestCase):
+
+    def test_review_get(self):
+        path = reverse('users:reviews')
+        response = self.client.get(path)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(response.context_data['title'], 'Отзывы')
+        self.assertTemplateUsed(response, 'users/reviews.html')
+
