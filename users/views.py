@@ -1,9 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic.edit import CreateView, UpdateView
 
 from products.utils import TitleMixin
@@ -80,3 +80,12 @@ class ReviewView(TitleMixin, SuccessMessageMixin, CreateView):
         context['reviews'] = Reviews.objects.all()
         context['count_review'] = Reviews.objects.count()
         return context
+
+
+class ReviewViewDelete(View):
+
+    def get(self, request, *args, **kwargs):
+        review = get_object_or_404(Reviews, pk=self.kwargs.get('review_id'))
+        review.delete()
+        return redirect('users:reviews')
+

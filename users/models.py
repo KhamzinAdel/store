@@ -73,5 +73,8 @@ class Reviews(models.Model):
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
 
+    def get_absolute_url(self):
+        return reverse('users:review_delete', kwargs={'review_id': self.pk})
+
     def __str__(self):
         return self.user.username

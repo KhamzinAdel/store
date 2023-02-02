@@ -75,16 +75,17 @@
                 <h5>{{ review.name }}</h5>
                 <p>
                   {{ review.text }}
-                </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">
                   </div>
-                  <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i> Ответить</a>
+                  <a href="#" class="link-muted"><i class="fas fa-reply me-1"></i> Ответить</a>
+                  {% if request.user == review.user %}
+                  <a href="{{ review.get_absolute_url }}"><i class="fas fa-trash"></i></a>
+                  {% endif %}
                 </div>
               </div>
             </div>
           </div>
         </div>
 {% endfor %}
-
 {% endblock %}
