@@ -1,0 +1,15 @@
+{%extends 'users/reviews.html'%}
+
+{% block content %}
+<div class="center">
+	<form method="post" class="card">
+		{% csrf_token %}
+		<h2>Удалить комментарий</h2>
+		<p>Вы уверены, что хотите удалить комментарий "{{ review.name }}"?</p>
+		<p class="form-buttons">
+			<input type="submit" class="btn btn-primary" value="Удалить">
+			<a href="{% url 'users:reviews'%}" class="btn btn-outline">Назад</a>
+		</p>
+	</form>
+</div>
+{% endblock content %}

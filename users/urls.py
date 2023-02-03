@@ -12,6 +12,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('reviews/', views.ReviewView.as_view(), name='reviews'),
-    path('reviews/delete/<int:review_id>', views.ReviewViewDelete.as_view(), name='review_delete'),
+    path('reviews/delete/<int:pk>', views.ReviewDeleteView.as_view(), name='review_delete'),
     path('verify/<str:email>/<uuid:code>/', views.EmailVerificationView.as_view(), name='email_verification'),
 ]
