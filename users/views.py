@@ -42,7 +42,7 @@ class UserProfileView(TitleMixin, LoginRequiredMixin, UpdateView):
         return reverse_lazy('users:profile', args=(self.request.user.id,))
 
 
-class ContactFormView(TitleMixin, SuccessMessageMixin, CreateView):
+class ContactFormView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Contact
     form_class = ContactForm
     title = 'Обратная связь'
@@ -67,7 +67,7 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return redirect('index')
 
 
-class ReviewView(TitleMixin, SuccessMessageMixin, CreateView):
+class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Reviews
     form_class = ReviewsForm
     template_name = 'users/reviews.html'
@@ -82,7 +82,7 @@ class ReviewView(TitleMixin, SuccessMessageMixin, CreateView):
         return context
 
 
-class ReviewDeleteView(DeleteView):
+class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     model = Reviews
     context_object_name = 'review'
     template_name = 'users/review_delete.html'
