@@ -81,4 +81,4 @@ class ReviewsForm(ModelForm):
 
     class Meta:
         model = Reviews
-        fields = ('name', 'text', 'user', 'star_rating')
+        fields = ('name', 'text', 'star_rating')

@@ -81,6 +81,10 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
         context['count_review'] = Reviews.objects.count()
         return context
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     model = Reviews
