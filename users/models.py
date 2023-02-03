@@ -64,9 +64,21 @@ class Contact(models.Model):
         return self.email
 
 
+class StarRating(models.Model):
+    value = models.SmallIntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'Звезда рейтинга'
+        verbose_name_plural = 'Звезды рейтинга'
+
+    def __str__(self):
+        return f'{self.value}'
+
+
 class Reviews(models.Model):
     name = models.CharField(max_length=100)
     text = models.TextField()
+    star_rating = models.ForeignKey('StarRating', on_delete=models.CASCADE)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
 
     class Meta:
@@ -74,7 +86,7 @@ class Reviews(models.Model):
         verbose_name_plural = 'Отзывы'
 
     def get_absolute_url(self):
-        return reverse('users:review_delete', kwargs={'review_id': self.pk})
+        return reverse('users:review_delete', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} - {self.star_rating}'

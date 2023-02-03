@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from products.admin import BasketAdmin
 
-from .models import Contact, EmailVerification, User, Reviews
+from .models import Contact, EmailVerification, User, Reviews, StarRating
 
 
 @admin.register(User)
@@ -27,5 +27,14 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    fields = ('name', 'text', 'user')
+    list_display = ('name', 'star_rating')
+    fields = ('name', 'text', 'user', 'star_rating')
+    readonly_fields = ('star_rating',)
+    ordering = ('star_rating',)
+
+
+@admin.register(StarRating)
+class StarRatingAdmin(admin.ModelAdmin):
+    list_display = ('value',)
+    fields = ('value',)
+

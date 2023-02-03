@@ -8,7 +8,7 @@ from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
 from django.forms import ModelForm
 from django.utils.timezone import now
 
-from .models import Contact, EmailVerification, User, Reviews
+from .models import Contact, EmailVerification, User, Reviews, StarRating
 
 
 class UserLoginForm(AuthenticationForm):
@@ -75,7 +75,10 @@ class ContactForm(ModelForm):
 class ReviewsForm(ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control py-4', 'cols': 16, 'rows': 4}))
+    star_rating = forms.ModelChoiceField(
+        queryset=StarRating.objects.all(), empty_label=None
+    )
 
     class Meta:
         model = Reviews
-        fields = ('name', 'text', 'user')
+        fields = ('name', 'text', 'user', 'star_rating')
