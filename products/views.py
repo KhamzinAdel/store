@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
 from .models import Basket, Product, ProductCategory
-from .utils import TitleMixin
+from common.views import TitleMixin
 
 
 class IndexView(TitleMixin, TemplateView):

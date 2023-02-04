@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from products.utils import TitleMixin
+from common.views import TitleMixin
 
 from .forms import (ContactForm, UserLoginForm, UserProfileForm,
                     UserRegistrationForm, ReviewsForm)
