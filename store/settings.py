@@ -24,9 +24,9 @@ SECRET_KEY = 'django-insecure-p(=q+2)7rrj(u_1=dculal7vi3)dsc#1k$!y4uhrv)zi$2d&v^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 # Application definition
 
@@ -176,3 +176,8 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
+
+# Stripe
+
+STRIPE_PUBLIC_KEY = 'pk_test_51MY9KWAyCnZvbDMvOV80W3VoP1AetAlzr1bJ0NPXN21ca3qtZTZ8NLvIzn4sv19KdAjaR9aQbBtt3pE1tJ4fZg7u00UkI2JbvN'
+STRIPE_SECRET_KEY = 'sk_test_51MY9KWAyCnZvbDMvvEHZ6Ol2uCxC4wzCiKDbF5zAa5Z3gqbs4aKVgJVwQ6vzS2YibQuzuSCqX3c0BJZ1D9HEXub7009ogwcPhf'
