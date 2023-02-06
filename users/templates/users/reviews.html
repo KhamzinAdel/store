@@ -79,7 +79,7 @@
                   <div class="d-flex align-items-center">
                   </div>
                   <i>Оценка: {{ review.star_rating }}</i>
-                  {% if request.user == review.user %}
+                  {% if user == review.user or user.is_superuser %}
                   <a href="{{ review.get_absolute_url }}"><i class="fas fa-trash"></i></a>
                   {% endif %}
                 </div>
