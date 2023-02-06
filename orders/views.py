@@ -28,7 +28,7 @@ class CanceledTemplateView(TemplateView):
 class OrderListView(TitleMixin, ListView):
     title = 'Store - Заказы'
     template_name = 'orders/orders.html'
-    queryset = Order.objects.filter()
+    queryset = Order.objects.all()
     context_object_name = 'orders'
     ordering = ('-created',)
 
