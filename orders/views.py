@@ -32,9 +32,7 @@ class OrderListView(TitleMixin, ListView):
     ordering = ('-created',)
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return Order.objects.all()
-        return Order.objects.filter(initiator=self.request.user)
+        return Order.objects.all() if self.request.user.is_superuser else Order.objects.filter(initiator=self.request.user)
 
 
 class OrderCreateView(TitleMixin, CreateView):
