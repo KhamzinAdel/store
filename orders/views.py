@@ -28,13 +28,13 @@ class CanceledTemplateView(TemplateView):
 class OrderListView(TitleMixin, ListView):
     title = 'Store - Заказы'
     template_name = 'orders/orders.html'
-    queryset = Order.objects.all()
     context_object_name = 'orders'
     ordering = ('-created',)
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(initiator=self.request.user)
+        if self.request.user.is_superuser:
+            return Order.objects.all()
+        return Order.objects.filter(initiator=self.request.user)
 
 
 class OrderCreateView(TitleMixin, CreateView):
