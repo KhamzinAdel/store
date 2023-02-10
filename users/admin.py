@@ -28,8 +28,8 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'star_rating')
-    fields = ('name', 'text', 'user', 'star_rating')
-    readonly_fields = ('star_rating',)
+    fields = ('name', 'text', 'user', 'star_rating', 'created')
+    readonly_fields = ('created',)
     ordering = ('star_rating',)
 
 

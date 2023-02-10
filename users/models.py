@@ -80,6 +80,7 @@ class Reviews(models.Model):
     text = models.TextField()
     star_rating = models.ForeignKey('StarRating', on_delete=models.CASCADE)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Отзыв'

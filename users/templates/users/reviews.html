@@ -71,8 +71,10 @@
                          class="img-thumbnail">
           <div class="card w-100">
             <div class="card-body p-4">
-              <div class="">
+              <div class="d-flex justify-content-between">
                 <h5>{{ review.name }} ({{ review.user.username }})</h5>
+              <h6>{{ review.created }}</h6>
+              </div>
                 <p>
                   {{ review.text }}
                 <div class="d-flex justify-content-between align-items-center">
