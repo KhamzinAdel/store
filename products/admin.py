@@ -28,3 +28,7 @@ class BasketAdmin(admin.TabularInline):
     model = Basket
     fields = ('product', 'quantity')
     extra = 0
+
+
+admin.site.site_title = 'Store'
+admin.site.site_header = 'Store'
