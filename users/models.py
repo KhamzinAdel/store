@@ -11,6 +11,10 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, blank=False)
     is_verified_email = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
     def __str__(self):
         return self.username
 

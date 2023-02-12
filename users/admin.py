@@ -5,10 +5,16 @@ from products.admin import BasketAdmin
 from .models import Contact, EmailVerification, User, Reviews, StarRating
 
 
+class ReviewInline(admin.TabularInline):
+    model = Reviews
+    extra = 1
+    readonly_fields = ('name', 'star_rating')
+
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email')
-    inlines = (BasketAdmin,)
+    inlines = (BasketAdmin, ReviewInline)
 
 
 @admin.register(EmailVerification)
@@ -37,4 +43,3 @@ class ReviewsAdmin(admin.ModelAdmin):
 class StarRatingAdmin(admin.ModelAdmin):
     list_display = ('value',)
     fields = ('value',)
-
