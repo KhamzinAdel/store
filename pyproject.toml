@@ -16,6 +16,7 @@ django-allauth = "^0.52.0"
 django-simple-captcha = "^0.5.17"
 django-debug-toolbar = "^3.8.1"
 stripe = "^5.1.0"
+django-modeltranslation = "^0.18.9"
 
 
 [build-system]

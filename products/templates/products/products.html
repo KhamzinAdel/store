@@ -1,6 +1,7 @@
 {% extends 'products/base.html' %}
 {% load static %}
 {% load  humanize %}
+{% load static i18n %}
 
 {% block css %}
     <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
@@ -70,7 +71,7 @@
                             </div>
                             <div class="card-footer text-center">
                                 <a class="btn btn-outline-success" href="{% url 'products:basket_add' product.id %}">
-                                    Отправить в корзину
+                                    {% trans 'Отправить в корзину' %}
                                 </a>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
         <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
             <a class="page-link"
                href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}"
-               tabindex="-1" aria-disabled="true">Предыдущая</a>
+               tabindex="-1" aria-disabled="true">{% trans 'Предыдущая' %}</a>
         </li>
         {% for page in page_obj.paginator.page_range %}
             <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
@@ -91,7 +92,7 @@
         <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
             <a class="page-link"
                href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}"
-               tabindex="-1" aria-disabled="true">Следующая</a>
+               tabindex="-1" aria-disabled="true">{% trans 'Следующая' %}</a>
         </li>
     </ul>
 </nav>

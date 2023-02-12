@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products:products' %}">Каталог <i class="fas fa-shopping-bag"></i> </a>
+                    <a class="nav-link" href="{% url 'products:products' %}">{% trans 'Каталог' %} <i class="fas fa-shopping-bag"></i> </a>
                 </li>
                 {% if user.is_authenticated %}
                       <li class="nav-item dropdown">
@@ -44,39 +44,56 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="{% url 'users:profile' user.id %}">Профиль</a>
+                            <a class="dropdown-item" href="{% url 'users:profile' user.id %}">{% trans 'Профиль' %}</a>
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'orders:orders_list' %}">Заказы</a></li>
+                        <li><a class="dropdown-item" href="{% url 'orders:orders_list' %}">{% trans 'Заказы' %}</a></li>
                         {% if user.is_superuser or user.is_staff %}
-                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админ-панель</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans 'Админ-панель' %}</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             {% endif %}
-                             <li><a class="dropdown-item" href="{% url 'users:reviews' %}">Отзывы</a></li>
+                             <li><a class="dropdown-item" href="{% url 'users:reviews' %}">{% trans 'Отзывы' %}</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{% url 'users:contact' %}">Обратная связь</a></li>
+                            <li><a class="dropdown-item" href="{% url 'users:contact' %}">{% trans 'Обратная связь' %}</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
 
                         <li>
                             <a class="dropdown-item" href="{% url 'users:logout' %}">
-                                Выйти
+                                {% trans 'Выйти' %}
                             </a>
                         </li>
                     </ul>
                 </li>
                 {% else %}
                     <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link" href="{% url 'users:login' %}">{% trans 'Войти' %} <i class="fas fa-sign-in-alt"></i></a>
                 </li>
                 {% endif %}
-            </ul>
-        </div>
+            <li>
+            </div>
     </div>
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}">
+        <select name="language">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option  value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                        selected{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+    </li>
+            </ul>
 </nav>
 
 {% block content %} {% endblock %}
