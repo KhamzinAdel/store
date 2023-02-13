@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.db.models import Q
 
 from .models import Basket, Product, ProductCategory
 from common.views import TitleMixin
@@ -49,3 +50,17 @@ def basket_remove(request, basket_id):
     basket = get_object_or_404(Basket, pk=basket_id)
     basket.delete()
     return redirect(request.META['HTTP_REFERER'])
+
+
+class Search(ListView):
+    paginate_by = 3
+    template_name = 'products/products.html'
+
+    def get_queryset(self):
+        value = self.request.GET.get('val')
+        return Product.objects.filter(Q(name__contains=value) | Q(description__contains=value))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['val'] = self.request.GET.get('val')
+        return context
