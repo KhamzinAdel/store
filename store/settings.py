@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.vk',
     'debug_toolbar',
     'captcha',
+    'snowpenguin.django.recaptcha3',
 
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
@@ -204,3 +205,10 @@ SOCIALACCOUNT_PROVIDERS = {
 
 STRIPE_PUBLIC_KEY = 'pk_test_51MY9KWAyCnZvbDMvOV80W3VoP1AetAlzr1bJ0NPXN21ca3qtZTZ8NLvIzn4sv19KdAjaR9aQbBtt3pE1tJ4fZg7u00UkI2JbvN'
 STRIPE_SECRET_KEY = 'sk_test_51MY9KWAyCnZvbDMvvEHZ6Ol2uCxC4wzCiKDbF5zAa5Z3gqbs4aKVgJVwQ6vzS2YibQuzuSCqX3c0BJZ1D9HEXub7009ogwcPhf'
+
+#  reCAPTCHA
+
+RECAPTCHA_PUBLIC_KEY = '6LfDVX8kAAAAADq5D3D4V7y3q-kx8RvSNcJyk5rr'
+RECAPTCHA_PRIVATE_KEY = '6LfDVX8kAAAAAESBiQXZOCvyCv14vhHldMUGxj18'
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5

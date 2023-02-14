@@ -2,6 +2,7 @@ import uuid
 from datetime import timedelta
 
 from captcha.fields import CaptchaField
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)
@@ -78,7 +79,8 @@ class ReviewsForm(ModelForm):
     star_rating = forms.ModelChoiceField(
         queryset=StarRating.objects.all(), empty_label=None
     )
+    captcha = ReCaptchaField()
 
     class Meta:
         model = Reviews
-        fields = ('name', 'text', 'star_rating')
+        fields = ('name', 'text', 'star_rating', 'captcha')

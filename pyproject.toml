@@ -7,16 +7,17 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "^4.1.4"
+Django = "3.2.4"
 Pillow = "^9.3.0"
 flake8 = "^6.0.0"
 isort = "^5.11.4"
 psycopg2 = "^2.9.5"
 django-allauth = "^0.52.0"
 django-simple-captcha = "^0.5.17"
-django-debug-toolbar = "^3.8.1"
+django-debug-toolbar = "3.6.0"
 stripe = "^5.1.0"
 django-modeltranslation = "^0.18.9"
+django-recaptcha3 = "^0.4.0"
 
 
 [build-system]
