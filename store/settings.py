@@ -32,6 +32,8 @@ DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 INSTALLED_APPS = [
     'modeltranslation',
+    'adminlte3',
+    'adminlte3_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

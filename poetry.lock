@@ -81,6 +81,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-adminlte3"
+version = "0.1.6"
+description = "Admin LTE templates, admin theme, and template tags for Django"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
 name = "django-allauth"
 version = "0.52.0"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
@@ -373,7 +384,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b4f869e6750fd94a7e0c27b17bb204b819927902ff6a262822c01edb50567bdb"
+content-hash = "94cff0e4377e321ac947dab813e7aca678d9b06b3f42fc26397044015a0a81b5"
 
 [metadata.files]
 asgiref = [
@@ -572,6 +583,10 @@ defusedxml = [
 Django = [
     {file = "Django-3.2.4-py3-none-any.whl", hash = "sha256:ea735cbbbb3b2fba6d4da4784a0043d84c67c92f1fdf15ad6db69900e792c10f"},
     {file = "Django-3.2.4.tar.gz", hash = "sha256:66c9d8db8cc6fe938a28b7887c1596e42d522e27618562517cc8929eb7e7f296"},
+]
+django-adminlte3 = [
+    {file = "django-adminlte3-0.1.6.tar.gz", hash = "sha256:46d10068979145fa997051ddc78a29fc264ab2f17de321f38ed40c71dad3ca7e"},
+    {file = "django_adminlte3-0.1.6-py3-none-any.whl", hash = "sha256:f11bfc828830f9e6b0692a5ac597151372baca31eaa23733ae23be4cdb677aa6"},
 ]
 django-allauth = [
     {file = "django-allauth-0.52.0.tar.gz", hash = "sha256:e380661ceafe55734c40102819ae720403027036f28e9f9827f0faeddc24ed5f"},
