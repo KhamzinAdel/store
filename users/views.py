@@ -92,3 +92,9 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'users/review_delete.html'
     success_url = reverse_lazy('users:reviews')
 
+
+class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+    model = Reviews
+    template_name = 'users/review_update.html'
+    success_url = reverse_lazy('users:reviews')
+    fields = ('star_rating', 'text')

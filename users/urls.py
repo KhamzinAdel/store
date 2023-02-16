@@ -13,5 +13,6 @@ urlpatterns = [
     path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('reviews/', views.ReviewView.as_view(), name='reviews'),
     path('reviews/delete/<int:pk>', views.ReviewDeleteView.as_view(), name='review_delete'),
+    path('reviews/update/<int:pk>', views.ReviewUpdateView.as_view(), name='review_update'),
     path('verify/<str:email>/<uuid:code>/', views.EmailVerificationView.as_view(), name='email_verification'),
 ]

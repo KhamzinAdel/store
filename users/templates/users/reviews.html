@@ -83,7 +83,8 @@
                   </div>
                   <i>Оценка: {{ review.star_rating }}</i>
                   {% if user == review.user or user.is_superuser %}
-                  <a href="{{ review.get_absolute_url }}"><i class="fas fa-trash"></i></a>
+                      <a href="{{ review.get_absolute_url }}" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                  <a href="{% url 'users:review_delete' review.pk %}"><i class="fas fa-trash"></i></a>
                   {% endif %}
                 </div>
               </div>
