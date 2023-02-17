@@ -24,7 +24,7 @@ class ProductsListView(TitleMixin, ListView):
         category_id = self.kwargs.get('category_id')
         return Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = ProductCategory.objects.all()
         return context
@@ -60,7 +60,7 @@ class Search(ListView):
         value = self.request.GET.get('val')
         return Product.objects.filter(Q(name__contains=value) | Q(description__contains=value))
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['val'] = self.request.GET.get('val')
         return context

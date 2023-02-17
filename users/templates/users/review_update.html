@@ -1,4 +1,5 @@
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Редактирование">
+    <a href="{% url 'users:reviews'%}" class="btn btn-outline">Назад</a>
 </form>
