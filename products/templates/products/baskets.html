@@ -19,7 +19,7 @@
                                     <input name="basketID" type="number" class="form-control"
                                            value="{{ basket.product.quantity }}" min="0">
                                 </div>
-                                <div class="col-lg-4">{{ basket.sum|intcomma }}</div>
+                                <div class="col-lg-4">{{ basket.sum|intcomma }} руб.</div>
                                 <div class="col-lg-4">
                                     <a href="{% url 'products:basket_remove' basket.id %}">
                                         <i class="fas fa-trash"></i>
@@ -33,7 +33,7 @@
     <div class="card mb-3">
                     <div class="card-footer">
                         <p class="float-left">Итого</p>
-                        <h4 class="float-right">{{ baskets.total_sum|intcomma }}</h4>
+                        <h4 class="float-right">{{ baskets.total_sum|intcomma }} руб.</h4>
                     </div>
                 </div>
     <a class="btn btn-success btn-lg float-right" href="{% url 'orders:order_create' %}">

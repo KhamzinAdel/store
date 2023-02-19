@@ -13,7 +13,7 @@ class ReviewInline(admin.TabularInline):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email')
+    list_display = ('username', 'email', 'is_verified_email')
     inlines = (BasketAdmin, ReviewInline)
 
 
