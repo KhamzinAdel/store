@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'modeltranslation',
     'adminlte3',
     'adminlte3_theme',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -195,6 +196,7 @@ SOCIALACCOUNT_EMAIL_REQUIRED = True
 SITE_ID = 1
 
 # Provider specific settings
+
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
         'SCOPE': [
@@ -214,3 +216,7 @@ RECAPTCHA_PUBLIC_KEY = '6LfDVX8kAAAAADq5D3D4V7y3q-kx8RvSNcJyk5rr'
 RECAPTCHA_PRIVATE_KEY = '6LfDVX8kAAAAAESBiQXZOCvyCv14vhHldMUGxj18'
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
+
+# Mapbox
+
+MAPBOX_PUBLIC_TOKEN = 'pk.eyJ1Ijoia2hhbXppbiIsImEiOiJjbGR0NjRiYjUxMWZuM3dwOTU0NDhhOXlvIn0.aC0C6OjnLkkT6YEg-fnGWw'

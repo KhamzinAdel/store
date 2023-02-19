@@ -19,6 +19,7 @@ stripe = "^5.1.0"
 django-modeltranslation = "^0.18.9"
 django-recaptcha3 = "^0.4.0"
 django-adminlte3 = "^0.1.6"
+geocoder = "^1.38.1"
 
 
 [build-system]
