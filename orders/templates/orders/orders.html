@@ -22,7 +22,7 @@
                         <th scope="row">{{ order.id }}</th>
                         <td>{{ order.get_status_display  }}</td>
                         <td>{{ order.created|naturaltime}}</td>
-                        <td>{{ order.basket_history.total_sum|intcomma }}</td>
+                        <td>{{ order.basket_history.total_sum|intcomma }} руб.</td>
                         <td>{{ order.email }}</td>
                     </tr>
                     {% endfor %}
