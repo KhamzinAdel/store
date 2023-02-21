@@ -42,6 +42,9 @@
             <li class="nav-item">
                     <a class="nav-link" href="{% url 'products:products' %}">{% trans 'Каталог' %} <i class="fas fa-shopping-bag"></i> </a>
                 </li>
+             <li class="nav-item">
+                    <a class="nav-link" href="{% url 'products:favorites:favorites_list' %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </li>
                 {% if user.is_authenticated %}
                       <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

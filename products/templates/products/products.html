@@ -20,10 +20,7 @@
                 <a href="{{ category.get_absolute_url }}" class="list-group-item">{{ category.name }}</a>
                 {% endfor %}
             </div>
-
         </div>
-        <!-- /.col-lg-3 -->
-
         <div class="col-lg-9">
 
             <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
@@ -68,6 +65,7 @@
                                 </h4>
                                 <h5> {{ product.price|intcomma }} руб.</h5>
                                 <p class="card-text"> {{ product.description }}</p>
+                                {% include 'favorites/add_to_favorites.html' with type='product' product_id=product.id %}
                             </div>
                             <div class="card-footer text-center">
                                 <a class="btn btn-outline-success" href="{% url 'products:basket_add' product.id %}">
@@ -96,7 +94,6 @@
         </li>
     </ul>
 </nav>
-
         </div>
 
     </div>

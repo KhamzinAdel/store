@@ -1,0 +1,8 @@
+{% if request.session.favorites %}
+            <div class="ml-3">
+                <form action="{% url 'products:favorites:favorites_remove' product_id=product_id %}" method="post">
+                    {% csrf_token %}
+                     <button type="submit" class="btn-outline-danger"> <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                </form>
+            </div>
+{% endif %}
