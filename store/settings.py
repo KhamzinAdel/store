@@ -184,6 +184,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'hamzinadel@yandex.ru'
 EMAIL_HOST_PASSWORD = 'apyalnaytafflohu'
 EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # OAuth
 
