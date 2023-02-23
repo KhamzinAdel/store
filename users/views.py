@@ -7,6 +7,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from common.views import TitleMixin
+from .services import email
 
 from .forms import (ContactForm, UserLoginForm, UserProfileForm,
                     UserRegistrationForm, ReviewsForm)
@@ -49,6 +50,11 @@ class ContactFormView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, Creat
     template_name = 'users/contact.html'
     success_url = reverse_lazy('users:contact')
     success_message = 'Сообщение отправлено'
+
+    def form_valid(self, form):
+        data = form.data
+        email(name=data['first_name'], email=data['email'], content=data['content'])
+        return super().form_valid(form)
 
 
 class EmailVerificationView(TitleMixin, TemplateView):

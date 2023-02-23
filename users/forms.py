@@ -65,7 +65,8 @@ class ContactForm(ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control py-4', 'cols': 30, 'rows': 10}))
+    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control py-4', 'cols': 30, 'rows': 10,
+                                                           'placeholder': 'Напишите тут ваше сообщение'}))
     captcha = CaptchaField()
 
     class Meta:
