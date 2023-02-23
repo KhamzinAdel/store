@@ -9,9 +9,18 @@ from users.models import User
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-class ProductCategory(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    description = models.TextField(null=True, blank=True)
+class GeneralProduct(models.Model):
+    name = models.CharField(max_length=250)
+    description = models.TextField()
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class ProductCategory(GeneralProduct):
 
     class Meta:
         verbose_name = 'Категория'
@@ -24,9 +33,7 @@ class ProductCategory(models.Model):
         return self.name
 
 
-class Product(models.Model):
-    name = models.CharField(max_length=250)
-    description = models.TextField()
+class Product(GeneralProduct):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products_images')
@@ -89,4 +96,3 @@ class Basket(models.Model):
 
     def sum(self):
         return self.product.price * self.quantity
-
