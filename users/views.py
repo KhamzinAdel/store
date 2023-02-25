@@ -11,7 +11,7 @@ from .services import email
 
 from .forms import (ContactForm, UserLoginForm, UserProfileForm,
                     UserRegistrationForm, ReviewsForm)
-from .models import Contact, EmailVerification, User, Reviews
+from .models import Contact, EmailVerification, User, Reviews, StarRating
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -83,8 +83,10 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reviews'] = Reviews.objects.all()
+        star_rating = self.kwargs.get('star_rating')
         context['count_review'] = Reviews.objects.count()
+        context['stars_rating'] = StarRating.objects.all()
+        context['reviews'] = Reviews.objects.filter(star_rating=star_rating) if star_rating else Reviews.objects.all()
         return context
 
     def form_valid(self, form):

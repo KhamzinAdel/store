@@ -3,7 +3,16 @@
 
 {% block content %}
     <main>
-        <div class="container">
+    <div class="d-flex m-5">
+                <div class="list-group mt-5">
+                <a href="{% url 'users:reviews' %}" class="my-4">Все отзывы</a>
+                {% for star in stars_rating %}
+                     <ul class="stars">
+                             <li><a href="{% url 'users:star_rating' star.id %}"><span aria-hidden="true"> Оценка: {{ star.value }}</span></a></li>
+                                </ul>
+                    {% endfor %}
+                </div>
+        <div class="container mt-2">
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         {% if messages or form.non_field_errors %}
@@ -59,6 +68,7 @@
                     </div>
                 </div>
             </div>
+   </div>
         </main>
     <section>
   <div class="container my-5 py-5 text-dark">
