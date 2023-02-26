@@ -1,0 +1,11 @@
+<h3 class="footer-title text-uppercase editContent mb-lg-4 mb-3">
+    Новостная рассылка</h3>
+
+<p class="editContent">Подписавшись на наш список рассылки, вы всегда будете
+получайте от нас последние новости и обновления.</p>
+<form action="{% url 'users:mailing' %}" method="post" class="w3layouts-newsletter">
+    {% csrf_token %}
+    {{ mailing_form }}
+    <button class="btn1 btn"><span class="fa fa-paper-plane-o white" aria-hidden="true"></span>
+    </button>
+</form>

@@ -7,11 +7,11 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from common.views import TitleMixin
-from .services import email
+from .services import email_contact
 
 from .forms import (ContactForm, UserLoginForm, UserProfileForm,
-                    UserRegistrationForm, ReviewsForm)
-from .models import Contact, EmailVerification, User, Reviews, StarRating
+                    UserRegistrationForm, ReviewsForm, MailingForm)
+from .models import Contact, EmailVerification, User, Reviews, StarRating, Mailing
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -53,7 +53,7 @@ class ContactFormView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, Creat
 
     def form_valid(self, form):
         data = form.data
-        email(name=data['first_name'], email=data['email'], content=data['content'])
+        email_contact(name=data['first_name'], email=data['email'], content=data['content'])
         return super().form_valid(form)
 
 
@@ -106,3 +106,9 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'users/review_update.html'
     success_url = reverse_lazy('users:reviews')
     fields = ('star_rating', 'text')
+
+
+class MailingView(CreateView):
+    model = Mailing
+    form_class = MailingForm
+    success_url = '/'

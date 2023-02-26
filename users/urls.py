@@ -1,5 +1,4 @@
 from django.urls import path, reverse_lazy
-from django.contrib.auth.views import LogoutView
 
 from . import views
 from django.contrib.auth.views import (
@@ -42,5 +41,6 @@ urlpatterns = [
     path('reviews/<int:star_rating>', views.ReviewView.as_view(), name='star_rating'),
     path('reviews/delete/<int:pk>', views.ReviewDeleteView.as_view(), name='review_delete'),
     path('reviews/update/<int:pk>', views.ReviewUpdateView.as_view(), name='review_update'),
+    path('mailing/', views.MailingView.as_view(), name='mailing'),
     path('verify/<str:email>/<uuid:code>/', views.EmailVerificationView.as_view(), name='email_verification'),
 ]

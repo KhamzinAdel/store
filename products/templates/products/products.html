@@ -2,6 +2,7 @@
 {% load static %}
 {% load  humanize %}
 {% load static i18n %}
+{% load contact_tags %}
 
 {% block css %}
     <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
@@ -105,7 +106,11 @@
    <footer class="bg-dark text-center text-white">
   <div class="container p-4 pb-0">
     <section class="mb-4">
-
+        {% mailing_form %}
+    </section>
+  </div>
+       © Adel 2023
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
       <!-- Telegram -->
       <a class="btn btn-outline-light btn-floating m-1" href="https://t.me/KhamzinAdel" role="button"
         ><i class="fab fa-telegram"></i
@@ -115,11 +120,6 @@
       <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KhamzinAdel" role="button"
         ><i class="fab fa-github"></i
       ></a>
-
-    </section>
-  </div>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © Adel 2023
   </div>
 </footer>
 {% endblock %}

@@ -95,3 +95,15 @@ class Reviews(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.star_rating}'
+
+
+class Mailing(models.Model):
+    email = models.EmailField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Рассылка'
+        verbose_name_plural = 'Рассылки'
+
+    def __str__(self):
+        return self.email

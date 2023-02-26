@@ -9,7 +9,7 @@ from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
 from django.forms import ModelForm
 from django.utils.timezone import now
 
-from .models import Contact, EmailVerification, User, Reviews, StarRating
+from .models import Contact, EmailVerification, User, Reviews, StarRating, Mailing
 
 
 class UserLoginForm(AuthenticationForm):
@@ -85,3 +85,11 @@ class ReviewsForm(ModelForm):
     class Meta:
         model = Reviews
         fields = ('name', 'text', 'star_rating', 'captcha')
+
+
+class MailingForm(ModelForm):
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'editContent', 'placeholder': 'Введите почту...'}))
+
+    class Meta:
+        model = Mailing
+        fields = ('email',)

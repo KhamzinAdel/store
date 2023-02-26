@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from products.admin import BasketAdmin
 
-from .models import Contact, EmailVerification, User, Reviews, StarRating
+from .models import Contact, EmailVerification, User, Reviews, StarRating, Mailing
 
 
 class ReviewInline(admin.TabularInline):
@@ -43,3 +43,11 @@ class ReviewsAdmin(admin.ModelAdmin):
 class StarRatingAdmin(admin.ModelAdmin):
     list_display = ('value',)
     fields = ('value',)
+
+
+@admin.register(Mailing)
+class MailingAdmin(admin.ModelAdmin):
+    list_display = ('email', 'date')
+    fields = ('email',)
+    readonly_fields = ('date',)
+    ordering = ('date',)
