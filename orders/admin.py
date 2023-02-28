@@ -13,4 +13,3 @@ class OrderAdmin(admin.ModelAdmin):
         'basket_history', 'status', 'initiator', ('lat', 'long')
     )
     readonly_fields = ('id', 'created')
-

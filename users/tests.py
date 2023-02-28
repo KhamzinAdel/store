@@ -75,4 +75,3 @@ class ReviewViewTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(response.context_data['title'], 'Отзывы')
         self.assertTemplateUsed(response, 'users/reviews.html')
-

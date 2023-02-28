@@ -46,5 +46,3 @@ class ProductListVIewTestCase(TestCase):
             list(self.products.filter(category_id=category.id))
         )
 
-
-

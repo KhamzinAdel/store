@@ -12,4 +12,3 @@ urlpatterns = [
     path('baskets/remove/<int:basket_id>/', views.basket_remove, name='basket_remove'),
     path('favorites/', include('favorites.urls', namespace='favorites')),
 ]
-
