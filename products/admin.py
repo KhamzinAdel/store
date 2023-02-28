@@ -18,9 +18,10 @@ class ProductAdmin(TranslationAdmin):
     fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category', 'get_image')
     readonly_fields = ('description', 'get_image')
     search_fields = ('name',)
-    ordering = ('name',)
+    ordering = ('price',)
 
-    def get_image(self, obj):
+    @staticmethod
+    def get_image(obj):
         return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
 
 
