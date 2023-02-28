@@ -1,8 +1,7 @@
 import stripe
-
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from django.conf import settings
 
 from users.models import User
 

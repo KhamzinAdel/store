@@ -1,4 +1,5 @@
 from django import template
+
 from users.forms import MailingForm
 
 register = template.Library()

@@ -2,14 +2,15 @@ import uuid
 from datetime import timedelta
 
 from captcha.fields import CaptchaField
-from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)
 from django.forms import ModelForm
 from django.utils.timezone import now
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
-from .models import Contact, EmailVerification, User, Reviews, StarRating, Mailing
+from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
+                     User)
 
 
 class UserLoginForm(AuthenticationForm):

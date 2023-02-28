@@ -4,14 +4,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from common.views import TitleMixin
-from .services import email_contact
 
-from .forms import (ContactForm, UserLoginForm, UserProfileForm,
-                    UserRegistrationForm, ReviewsForm, MailingForm)
-from .models import Contact, EmailVerification, User, Reviews, StarRating, Mailing
+from .forms import (ContactForm, MailingForm, ReviewsForm, UserLoginForm,
+                    UserProfileForm, UserRegistrationForm)
+from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
+                     User)
+from .services import email_contact
 
 
 class UserLoginView(TitleMixin, LoginView):

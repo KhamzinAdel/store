@@ -1,10 +1,9 @@
 import geocoder
-
-from django.db import models
 from django.conf import settings
+from django.db import models
 
-from users.models import User
 from products.models import Basket
+from users.models import User
 
 
 class Order(models.Model):

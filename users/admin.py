@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from products.admin import BasketAdmin
 
-from .models import Contact, EmailVerification, User, Reviews, StarRating, Mailing
+from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
+                     User)
 
 
 class ReviewInline(admin.TabularInline):
