@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 
 from users.models import User
+from .services import geo_address
 
 
 class Order(models.Model):
@@ -29,10 +30,7 @@ class Order(models.Model):
     initiator = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
-        g = geocoder.mapbox(self.address, key=settings.MAPBOX_PUBLIC_TOKEN)
-        g = g.latlng  # [lat, long]
-        self.lat = g[0]
-        self.long = g[1]
+        self.lat, self.long = geo_address(self.address)
         return super().save(*args, **kwargs)
 
     class Meta:
