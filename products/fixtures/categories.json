@@ -1,1 +1,41 @@
-[{"model": "products.productcategory", "pk": 1, "fields": {"name": "Одежда", "description": "Описание для одежды"}}, {"model": "products.productcategory", "pk": 2, "fields": {"name": "Обувь", "description": "Описание для обуви"}}, {"model": "products.productcategory", "pk": 3, "fields": {"name": "Новинки", "description": "Новинки этого сезона"}}, {"model": "products.productcategory", "pk": 4, "fields": {"name": "Аксессуары", "description": "Аксессуары этого сезона"}}, {"model": "products.productcategory", "pk": 5, "fields": {"name": "Подарки", "description": "Подарки друзьям"}}]
+[
+  {
+    "model": "products.productcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Одежда",
+      "description": "Описание для одежды"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Обувь",
+      "description": "Описание для обуви"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Новинки",
+      "description": "Новинки этого сезона"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Аксессуары",
+      "description": "Аксессуары этого сезона"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Подарки",
+      "description": "Подарки друзьям"}
+  }
+]
