@@ -53,7 +53,7 @@ class ContactFormView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, Creat
     success_message = 'Сообщение отправлено'
 
     def form_valid(self, form):
-        data = form.data
+        data = form.cleaned_data
         email_contact(name=data['first_name'], email=data['email'], content=data['content'])
         return super().form_valid(form)
 
@@ -109,7 +109,7 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     fields = ('star_rating', 'text')
 
 
-class MailingView(CreateView):
+class MailingView(LoginRequiredMixin, CreateView):
     model = Mailing
     form_class = MailingForm
-    success_url = '/'
+    success_url = reverse_lazy('products:products')
