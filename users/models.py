@@ -98,7 +98,7 @@ class Reviews(models.Model):
 
 
 class Mailing(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True, blank=False)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:

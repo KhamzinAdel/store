@@ -113,6 +113,7 @@ class MailingView(LoginRequiredMixin, CreateView):
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy('products:products')
+    template_name = 'users/mailing_again.html'
 
     def form_valid(self, form):
         send_spam_email.delay(form.instance.email)

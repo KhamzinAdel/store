@@ -22,6 +22,7 @@ django-adminlte3 = "^0.1.6"
 geocoder = "^1.38.1"
 celery = "^5.2.7"
 redis = "^4.5.1"
+flower = "^1.2.0"
 
 
 [build-system]

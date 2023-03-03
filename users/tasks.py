@@ -17,12 +17,12 @@ def send_spam_email(user_email: str):
 
 @app.task
 def send_beat_email():
-    for contact_email in Mailing.objects.all():
+    for contact_email in Mailing.objects.values('email'):
         send_mail(
             'Вы подписаны на рассылку',
-            'Мы будем присылать вам письмо каждые 5 минут.',
+            'Мы будем присылать уведомления о новых скидках',
             'hamzinadel@yandex.ru',
-            [contact_email.email],
+            [contact_email['email']],
             fail_silently=False,
         )
 
