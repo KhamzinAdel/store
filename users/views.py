@@ -12,7 +12,7 @@ from .forms import (ContactForm, MailingForm, ReviewsForm, UserLoginForm,
                     UserProfileForm, UserRegistrationForm)
 from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
                      User)
-from .services import email_contact
+from .tasks import send_spam_email, send_email_contact
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -54,7 +54,7 @@ class ContactFormView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, Creat
 
     def form_valid(self, form):
         data = form.cleaned_data
-        email_contact(name=data['first_name'], email=data['email'], content=data['content'])
+        send_email_contact.delay(name=data['first_name'], email=data['email'], content=data['content'])
         return super().form_valid(form)
 
 
@@ -113,3 +113,7 @@ class MailingView(LoginRequiredMixin, CreateView):
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy('products:products')
+
+    def form_valid(self, form):
+        send_spam_email.delay(form.instance.email)
+        return super().form_valid(form)

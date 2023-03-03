@@ -1,15 +1,12 @@
-import uuid
-from datetime import timedelta
-
 from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)
 from django.forms import ModelForm
-from django.utils.timezone import now
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
+from .tasks import send_email_verification
 
-from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
+from .models import (Contact, Mailing, Reviews, StarRating,
                      User)
 
 
@@ -44,9 +41,7 @@ class UserRegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=True)
-        expiration = now() + timedelta(hours=48)
-        record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
-        record.send_verification_email()
+        send_email_verification.delay(user.id)
         return user
 
 
