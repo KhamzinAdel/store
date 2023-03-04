@@ -11,6 +11,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'send-spam-every-1st-day-month': {
         'task': 'users.tasks.send_beat_email',
-        'schedule':  crontab(0, 0, day_of_month='1'),
+        'schedule': crontab(0, 0, day_of_month='1'),
     }
 }
