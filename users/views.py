@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Count
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
@@ -85,7 +86,7 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         star_rating = self.kwargs.get('star_rating')
-        context['count_review'] = Reviews.objects.count()
+        context['count_review'] = Reviews.objects.annotate(Count('name'))
         context['stars_rating'] = StarRating.objects.all()
         context['reviews'] = Reviews.objects.filter(star_rating=star_rating) if star_rating else Reviews.objects.all()
         return context
