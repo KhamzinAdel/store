@@ -557,6 +557,25 @@ files = [
 requests = "*"
 
 [[package]]
+name = "django-redis"
+version = "5.2.0"
+description = "Full featured redis cache backend for Django."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django-redis-5.2.0.tar.gz", hash = "sha256:8a99e5582c79f894168f5865c52bd921213253b7fd64d16733ae4591564465de"},
+    {file = "django_redis-5.2.0-py3-none-any.whl", hash = "sha256:1d037dc02b11ad7aa11f655d26dac3fb1af32630f61ef4428860a2e29ff92026"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+redis = ">=3,<4.0.0 || >4.0.0,<4.0.1 || >4.0.1"
+
+[package.extras]
+hiredis = ["redis[hiredis] (>=3,!=4.0.0,!=4.0.1)"]
+
+[[package]]
 name = "django-simple-captcha"
 version = "0.5.17"
 description = "A very simple, yet powerful, Django captcha application"
@@ -1167,4 +1186,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "cfb60185c99b3d11ace0efff7b05b3ac1642c5d9bfc0876d934ce64c3ad5f047"
+content-hash = "071f47f04e18860e1d11ae540ea2f637da481669eedd3684597656bfe7ee6e58"
