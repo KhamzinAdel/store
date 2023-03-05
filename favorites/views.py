@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from products.models import Product
+from .favorites import Favorites
 
 
 @login_required
@@ -19,32 +20,20 @@ def favorites_list(request):
 
 @login_required
 def add_to_favorites(request, product_id):
-    if request.method == 'POST':
-        if not request.session.get('favorites'):
-            request.session['favorites'] = list()
-        else:
-            request.session['favorites'] = list(request.session['favorites'])
-    request.session['favorites'].append(product_id)
+    favorites = Favorites(request)
+    favorites.add(product_id=product_id)
     return redirect(request.META['HTTP_REFERER'])
 
 
+@login_required
 def remove_from_favorites(request, product_id):
-    if request.method == 'POST':
-        for item in request.session['favorites']:
-            if item == product_id:
-                request.session['favorites'].remove(item)
-
-        while [] in request.session['favorites']:
-            request.session['favorites'].remove([])
-
-        if not request.session['favorites']:
-            del request.session['favorites']
-
-        request.session.modified = True
-        return redirect(request.META['HTTP_REFERER'])
+    favorites = Favorites(request)
+    favorites.remove(product_id=product_id)
+    return redirect(request.META['HTTP_REFERER'])
 
 
+@login_required
 def delete_favorites(request):
-    if request.session.get('favorites'):
-        del request.session['favorites']
+    favorites = Favorites(request)
+    favorites.delete()
     return redirect(request.META['HTTP_REFERER'])

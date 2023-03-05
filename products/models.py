@@ -20,7 +20,6 @@ class GeneralProduct(models.Model):
 
 
 class ProductCategory(GeneralProduct):
-
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
@@ -58,41 +57,3 @@ class Product(GeneralProduct):
         stripe_product_price = stripe.Price.create(
             product=stripe_product['id'], unit_amount=round(self.price * 100), currency='rub')
         return stripe_product_price
-
-
-class BasketQuerySet(models.QuerySet):
-    def total_sum(self):
-        return sum(basket.sum() for basket in self)
-
-    def total_quantity(self):
-        return sum(basket.quantity for basket in self)
-
-    def stripe_products(self):
-        line_items = []
-        for basket in self:
-            item = {
-                'price': basket.product.stripe_product_price_id,
-                'quantity': basket.quantity,
-            }
-            line_items.append(item)
-
-        return line_items
-
-
-class Basket(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField(default=0)
-    created_timestamp = models.DateTimeField(auto_now_add=True)
-
-    objects = BasketQuerySet.as_manager()
-
-    class Meta:
-        verbose_name = 'Корзина'
-        verbose_name_plural = 'Корзины'
-
-    def __str__(self):
-        return f'Корзина для {self.user.email} │ Продукт: {self.product.name}'
-
-    def sum(self):
-        return self.product.price * self.quantity

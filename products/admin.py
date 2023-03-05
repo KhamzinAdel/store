@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from modeltranslation.admin import TranslationAdmin
 
-from .models import Basket, Product, ProductCategory
+from .models import Product, ProductCategory
 
 
 @admin.register(ProductCategory)
@@ -23,12 +23,6 @@ class ProductAdmin(TranslationAdmin):
     @staticmethod
     def get_image(obj):
         return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
-
-
-class BasketAdmin(admin.TabularInline):
-    model = Basket
-    fields = ('product', 'quantity')
-    extra = 0
 
 
 admin.site.site_title = 'Store'

@@ -9,7 +9,5 @@ urlpatterns = [
     path('', cache_page(60)(views.ProductsListView.as_view()), name='products'),
     path('category/<int:category_id>', cache_page(60)(views.ProductsListView.as_view()), name='category'),
     path('search/', views.Search.as_view(), name='search'),
-    path('baskets/add/<int:product_id>/', views.basket_add, name='basket_add'),
-    path('baskets/remove/<int:basket_id>/', views.basket_remove, name='basket_remove'),
     path('favorites/', include('favorites.urls', namespace='favorites')),
 ]

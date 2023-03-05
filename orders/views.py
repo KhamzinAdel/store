@@ -3,16 +3,16 @@ from http import HTTPStatus
 import stripe
 from django.conf import settings
 from django.shortcuts import HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 
 from common.views import TitleMixin
 from orders.models import Order
-from products.models import Basket
 
 from .forms import OrderForm
+from .services import stripe_api
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -45,14 +45,7 @@ class OrderCreateView(TitleMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         super().post(request, *args, **kwargs)
-        baskets = Basket.objects.filter(user=self.request.user)
-        checkout_session = stripe.checkout.Session.create(
-            line_items=baskets.stripe_products(),
-            metadata={'order_id': self.object.id},
-            mode='payment',
-            success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order-success')),
-            cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order-canceled')),
-        )
+        checkout_session = stripe_api(request, self.object.id)
         return HttpResponseRedirect(checkout_session.url, status=HTTPStatus.SEE_OTHER)
 
     def form_valid(self, form):

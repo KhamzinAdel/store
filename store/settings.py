@@ -25,6 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-p(=q+2)7rrj(u_1=dculal7vi3)dsc#1k$!y4uhrv)zi$2d&v^'
 
+BASKET_SESSION_ID = 'basket'
+FAVORITES_SESSION_ID = 'favorites'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -61,6 +64,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'favorites.apps.FavoritesConfig',
+    'basket.apps.BasketConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +135,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'products.context_processors.baskets',
+                'basket.context_processors.basket',
             ],
         },
     },

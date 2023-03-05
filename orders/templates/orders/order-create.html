@@ -18,21 +18,21 @@
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Корзина</span>
-                    <span class="badge badge-primary badge-pill text-white">{{ baskets.total_quantity  }}</span>
+                    <span class="badge badge-primary badge-pill text-white">{{ baskets.get_total_price|intcomma  }}</span>
                 </h4>
                 <ul class="list-group mb-3">
-                    {% for basket in baskets %}
+                    {% for item in basket %}
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">{{ basket.product.name }}</h6>
-                            <small class="text-muted">{{ basket.quantity }} шт.</small>
+                            <h6 class="my-0">{{ item.product.name }}</h6>
+                            <small class="text-muted">{{ item.quantity }} шт.</small>
                         </div>
-                        <span class="text-muted">{{ basket.sum|intcomma }} руб.</span>
+                        <span class="text-muted">{{ item.total_price|intcomma }} руб.</span>
                     </li>
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Сумма к оплате</span>
-                        <strong>{{ baskets.total_sum|intcomma }} руб.</strong>
+                        <span>Сумма к оплате:</span>
+                        <strong>{{ basket.get_total_price|intcomma }} руб.</strong>
                     </li>
                 </ul>
             </div>

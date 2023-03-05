@@ -33,6 +33,7 @@ urlpatterns += i18n_patterns(
     path('118n/', include('django.conf.urls.i18n')),
     path('', IndexView.as_view(), name='index'),
     path('products/', include('products.urls', namespace='products')),
+    path('basket/', include('basket.urls', namespace='basket')),
 )
 
 if settings.DEBUG:

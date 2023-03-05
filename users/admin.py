@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from products.admin import BasketAdmin
-
 from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
                      User)
 
@@ -15,7 +13,7 @@ class ReviewInline(admin.TabularInline):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'is_verified_email')
-    inlines = (BasketAdmin, ReviewInline)
+    inlines = (ReviewInline,)
 
 
 @admin.register(EmailVerification)

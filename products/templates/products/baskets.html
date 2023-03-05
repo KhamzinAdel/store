@@ -1,27 +1,27 @@
 {% load humanize %}
-{% if baskets %}
+{% if basket %}
     <h4 class="mt-3 mb-3 d-flex justify-content-between align-items-center mb-3">
-                    Корзина <span class="badge badge-secondary badge-pill">{{ baskets.total_quantity }}</span>
+                    Корзина <span class="badge badge-secondary badge-pill"></span>
                 </h4>
-    {% for basket in baskets %}
+    {% for item in basket %}
+         {% with product=item.product %}
         <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">{{ basket.product.name }}</h5>
-                        <p class="card-text">{{ basket.product.description }}</p>
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
                     </div>
              <img width="100" height="100"
-             src="{{ basket.product.image.url }}"
+             src="{{ product.image.url }}"
              class="img-thumbnail">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-light">
                             <div class="row text-center">
                                 <div class="col-lg-4">
-                                    <input name="basketID" type="number" class="form-control"
-                                           value="{{ basket.product.quantity }}" min="0">
+                                    <a>Количество: {{ item.quantity }}</a>
                                 </div>
-                                <div class="col-lg-4">{{ basket.sum|intcomma }} руб.</div>
+                                <div class="col-lg-4">{{ item.total_price|intcomma }} руб.</div>
                                 <div class="col-lg-4">
-                                    <a href="{% url 'products:basket_remove' basket.id %}">
+                                    <a href="{% url 'basket:basket_remove' product.id %}">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -29,11 +29,12 @@
                         </li>
                     </ul>
                 </div>
+            {% endwith %}
     {% endfor %}
     <div class="card mb-3">
                     <div class="card-footer">
                         <p class="float-left">Итого</p>
-                        <h4 class="float-right">{{ baskets.total_sum|intcomma }} руб.</h4>
+                        <h4 class="float-right">{{ basket.get_total_price|intcomma }} руб.</h4>
                     </div>
                 </div>
     <a class="btn btn-success btn-lg float-right" href="{% url 'orders:order_create' %}">
@@ -44,4 +45,3 @@
                     Корзина пуста
                 </h4>
 {% endif %}
-

@@ -33,7 +33,7 @@
                                 {% include 'favorites/remove_from_favorites.html' with product_id=product.id %}
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn btn-outline-success" href="{% url 'products:basket_add' product.id %}">
+                                <a class="btn btn-outline-success" href="{% url 'basket:basket_add' product.id %}">
                                     Отправить в корзину
                                 </a>
                             </div>
