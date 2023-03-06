@@ -9,6 +9,9 @@ class Favorites:
             favorites = self.session[settings.FAVORITES_SESSION_ID] = []
         self.favorites = favorites
 
+    def favorite_list(self):
+        return self.session.get('favorites', [])
+
     def add(self, product_id):
         if not self.session.get('favorites'):
             self.session['favorites'] = list()

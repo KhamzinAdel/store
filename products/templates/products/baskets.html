@@ -21,9 +21,7 @@
                                 </div>
                                 <div class="col-lg-4">{{ item.total_price|intcomma }} руб.</div>
                                 <div class="col-lg-4">
-                                    <a href="{% url 'basket:basket_remove' product.id %}">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                    {% include 'basket/delete_to_basket.html' with type='basket' product_id=product.id %}
                                 </div>
                             </div>
                         </li>

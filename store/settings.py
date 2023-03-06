@@ -25,9 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-p(=q+2)7rrj(u_1=dculal7vi3)dsc#1k$!y4uhrv)zi$2d&v^'
 
-BASKET_SESSION_ID = 'basket'
-FAVORITES_SESSION_ID = 'favorites'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -121,6 +118,11 @@ LOGGING = {
         },
     },
 }
+
+# Session
+
+BASKET_SESSION_ID = 'basket'
+FAVORITES_SESSION_ID = 'favorites'
 
 ROOT_URLCONF = 'store.urls'
 

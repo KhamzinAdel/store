@@ -1,39 +1,49 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
+from django.views.generic.list import ListView
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from products.models import Product
-from .favorites import Favorites
+from .favorite import Favorites
+from common.views import TitleMixin
 
 
-@login_required
-def favorites_list(request):
-    favorites = request.session.get('favorites', [])
-    products = Product.objects.filter(pk__in=favorites)
-    len_products = len(favorites)
-    context = {
-        'title': 'Избранное',
-        'products': products,
-        'len_products': len_products,
-    }
-    return render(request, 'favorites/favorites-list.html', context=context)
+class FavoriteListView(TitleMixin, LoginRequiredMixin, ListView):
+    title = 'Избранное'
+    template_name = 'favorites/favorites-list.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        favorite = Favorites(self.request)
+        return Product.objects.filter(pk__in=favorite.favorite_list())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        favorite = Favorites(self.request)
+        context['len_products'] = len(favorite.favorite_list())
+        return context
 
 
-@login_required
-def add_to_favorites(request, product_id):
-    favorites = Favorites(request)
-    favorites.add(product_id=product_id)
-    return redirect(request.META['HTTP_REFERER'])
+class AddToFavoriteView(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        favorite = Favorites(request)
+        favorite.add(product_id=self.kwargs.get('product_id'))
+        return redirect(request.META['HTTP_REFERER'])
 
 
-@login_required
-def remove_from_favorites(request, product_id):
-    favorites = Favorites(request)
-    favorites.remove(product_id=product_id)
-    return redirect(request.META['HTTP_REFERER'])
+class RemoveFromFavoriteView(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        favorites = Favorites(request)
+        favorites.remove(product_id=self.kwargs.get('product_id'))
+        return redirect(request.META['HTTP_REFERER'])
 
 
-@login_required
-def delete_favorites(request):
-    favorites = Favorites(request)
-    favorites.delete()
-    return redirect(request.META['HTTP_REFERER'])
+class DeleteFavoriteView(LoginRequiredMixin, View):
+
+    @staticmethod
+    def post(request, *args, **kwargs):
+        favorites = Favorites(request)
+        favorites.delete()
+        return redirect(request.META['HTTP_REFERER'])

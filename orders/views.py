@@ -40,6 +40,7 @@ class OrderListView(TitleMixin, ListView):
 class OrderCreateView(TitleMixin, CreateView):
     title = 'Store - Оформление заказа'
     template_name = 'orders/order-create.html'
+    model = Order
     form_class = OrderForm
     success_url = reverse_lazy('orders:order_create')
 

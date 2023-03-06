@@ -1,0 +1,8 @@
+{% if request.session.basket %}
+            <div class="ml-3">
+                <form action="{% url 'basket:basket_remove' product_id=product_id %}" method="post">
+                    {% csrf_token %}
+                     <button type="submit" class="btn1 btn"> <i class="fas fa-trash"></i></button>
+                </form>
+            </div>
+{% endif %}

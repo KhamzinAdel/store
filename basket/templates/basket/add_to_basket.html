@@ -1,0 +1,6 @@
+{% load i18n %}
+
+<form action="{% url 'basket:basket_add' product_id=product_id %}" method="post">
+    {% csrf_token %}
+      <button type="submit" class="btn btn-outline-success">{% trans 'Отправить в корзину' %} </button>
+</form>
