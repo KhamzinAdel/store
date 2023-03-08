@@ -8,7 +8,7 @@ from django.utils.timezone import now
 from users.models import User, EmailVerification
 
 
-def email_contact(**kwargs):
+def email_contact(**kwargs: dict[str, str]):
     subject = 'Обратная связь'
     html_message = render_to_string('users/contact_email.html', {
         'name': kwargs.get('name'),
@@ -32,7 +32,7 @@ def email_send_mailing(user_email: str):
     )
 
 
-def logic_send_email_verification(user_id: str):
+def logic_send_email_verification(user_id: int):
     user = User.objects.get(pk=user_id)
     expiration = now() + timedelta(hours=48)
     record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)

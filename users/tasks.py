@@ -28,6 +28,6 @@ def send_beat_email():
 
 
 @app.task
-def send_email_verification(user_id: str):
+def send_email_verification(user_id: int):
     logic_send_email_verification(user_id)
 
