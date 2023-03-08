@@ -9,28 +9,59 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import environ
 import os.path
-from pathlib import Path
 
-from pythonjsonlogger.jsonlogger import JsonFormatter
+from pathlib import Path
 
 from store.logging_formatters import CustomJsonFormatter
 
+env = environ.Env(
+    DEBUG=bool,
+    SECRET_KEY=str,
+    DOMAIN_NAME=str,
+
+    REDIS_HOST=str,
+    REDIS_PORT=str,
+
+    DATABASE_NAME=str,
+    DATABASE_USER=str,
+    DATABASE_PASSWORD=str,
+    DATABASE_HOST=str,
+    DATABASE_PORT=str,
+
+    EMAIL_HOST=str,
+    EMAIL_PORT=int,
+    EMAIL_HOST_USER=str,
+    EMAIL_HOST_PASSWORD=str,
+    EMAIL_USE_SSL=bool,
+
+    STRIPE_PUBLIC_KEY=str,
+    STRIPE_SECRET_KEY=str,
+
+    RECAPTCHA_PUBLIC_KEY=str,
+    RECAPTCHA_PRIVATE_KEY=str,
+
+    MAPBOX_PUBLIC_TOKEN=str,
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p(=q+2)7rrj(u_1=dculal7vi3)dsc#1k$!y4uhrv)zi$2d&v^'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
-DOMAIN_NAME = 'http://127.0.0.1:8000'
+DOMAIN_NAME = env('DOMAIN_NAME')
 
 # Application definition
 
@@ -149,10 +180,17 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
+# Redis
+
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
+
+# Cashes
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -167,11 +205,11 @@ CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'store_db',
-        'USER': 'postgres',
-        'PASSWORD': '220602',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT'),
     }
 }
 
@@ -245,11 +283,11 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Sending emails
 
-EMAIL_HOST = 'smtp.yandex.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'hamzinadel@yandex.ru'
-EMAIL_HOST_PASSWORD = 'apyalnaytafflohu'
-EMAIL_USE_SSL = True
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # OAuth
@@ -275,27 +313,25 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # Stripe
 
-STRIPE_PUBLIC_KEY = 'pk_test_51MY9KWAyCnZvbDMvOV80W3VoP1AetAlzr1bJ0NPXN21ca3qtZTZ8NLvIzn4sv19KdAjaR9aQbBtt3pE1tJ4fZg7u00UkI2JbvN'
-STRIPE_SECRET_KEY = 'sk_test_51MY9KWAyCnZvbDMvvEHZ6Ol2uCxC4wzCiKDbF5zAa5Z3gqbs4aKVgJVwQ6vzS2YibQuzuSCqX3c0BJZ1D9HEXub7009ogwcPhf'
+STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 
 #  reCAPTCHA
 
-RECAPTCHA_PUBLIC_KEY = '6LfDVX8kAAAAADq5D3D4V7y3q-kx8RvSNcJyk5rr'
-RECAPTCHA_PRIVATE_KEY = '6LfDVX8kAAAAAESBiQXZOCvyCv14vhHldMUGxj18'
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 # Mapbox
 
-MAPBOX_PUBLIC_TOKEN = 'pk.eyJ1Ijoia2hhbXppbiIsImEiOiJjbGR0NjRiYjUxMWZuM3dwOTU0NDhhOXlvIn0.aC0C6OjnLkkT6YEg-fnGWw'
+MAPBOX_PUBLIC_TOKEN = env('MAPBOX_PUBLIC_TOKEN')
 
-# Celery & Redis
+# Celery
 
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = '6379'
-CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
