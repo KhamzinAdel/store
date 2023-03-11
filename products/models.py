@@ -3,8 +3,6 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-from users.models import User
-
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 

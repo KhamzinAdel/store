@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from common.views import TitleMixin
 
 from .models import Product, ProductCategory
+from .services import cashes_product
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -21,15 +22,19 @@ class ProductsListView(TitleMixin, ListView):
 
     def get_queryset(self):
         category_id = self.kwargs.get('category_id')
-        return Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+        queryset = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+        products = cashes_product('products', queryset, 30)
+        return products
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = ProductCategory.objects.all()
+        queryset = ProductCategory.objects.all()
+        categories = cashes_product('categories', queryset, 30)
+        context['categories'] = categories
         return context
 
 
-class Search(ListView):
+class SearchView(ListView):
     paginate_by = 3
     template_name = 'products/products.html'
 
