@@ -79,7 +79,7 @@ class StarRating(models.Model):
         return f'{self.value}'
 
 
-class Reviews(models.Model):
+class Review(models.Model):
     name = models.CharField(max_length=100)
     text = models.TextField()
     star_rating = models.ForeignKey('StarRating', on_delete=models.CASCADE)

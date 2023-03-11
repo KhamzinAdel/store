@@ -6,7 +6,7 @@ from django.forms import ModelForm
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from .tasks import send_email_verification
 
-from .models import (Contact, Mailing, Reviews, StarRating,
+from .models import (Contact, Mailing, Review, StarRating,
                      User)
 
 
@@ -79,7 +79,7 @@ class ReviewsForm(ModelForm):
     captcha = ReCaptchaField()
 
     class Meta:
-        model = Reviews
+        model = Review
         fields = ('name', 'text', 'star_rating', 'captcha')
 
 

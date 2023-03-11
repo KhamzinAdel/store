@@ -36,7 +36,7 @@ msgstr "Admin panel"
 
 #: .\products\templates\products\base.html:56
 msgid "Отзывы"
-msgstr "Reviews"
+msgstr "Review"
 
 #: .\products\templates\products\base.html:60
 msgid "Обратная связь"

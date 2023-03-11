@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
+from .models import (Contact, EmailVerification, Mailing, Review, StarRating,
                      User)
 
 
 class ReviewInline(admin.TabularInline):
-    model = Reviews
+    model = Review
     extra = 1
     readonly_fields = ('name', 'star_rating')
 
@@ -30,7 +30,7 @@ class ContactAdmin(admin.ModelAdmin):
     ordering = ('first_name',)
 
 
-@admin.register(Reviews)
+@admin.register(Review)
 class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'star_rating')
     fields = ('name', 'text', 'user', 'star_rating', 'created')

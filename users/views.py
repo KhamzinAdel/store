@@ -11,7 +11,7 @@ from common.views import TitleMixin
 
 from .forms import (ContactForm, MailingForm, ReviewsForm, UserLoginForm,
                     UserProfileForm, UserRegistrationForm)
-from .models import (Contact, EmailVerification, Mailing, Reviews, StarRating,
+from .models import (Contact, EmailVerification, Mailing, Review, StarRating,
                      User)
 from .tasks import send_spam_email, send_email_contact
 
@@ -76,7 +76,7 @@ class EmailVerificationView(TitleMixin, TemplateView):
 
 
 class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    model = Reviews
+    model = Review
     form_class = ReviewsForm
     template_name = 'users/reviews.html'
     success_url = reverse_lazy('users:reviews')
@@ -86,9 +86,9 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         star_rating = self.kwargs.get('star_rating')
-        context['count_review'] = Reviews.objects.annotate(Count('name'))
+        context['count_review'] = Review.objects.annotate(Count('name'))
         context['stars_rating'] = StarRating.objects.all()
-        context['reviews'] = Reviews.objects.filter(star_rating=star_rating) if star_rating else Reviews.objects.all()
+        context['reviews'] = Review.objects.filter(star_rating=star_rating) if star_rating else Review.objects.all()
         return context
 
     def form_valid(self, form):
@@ -97,14 +97,14 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
 
 
 class ReviewDeleteView(LoginRequiredMixin, DeleteView):
-    model = Reviews
+    model = Review
     context_object_name = 'review'
     template_name = 'users/review_delete.html'
     success_url = reverse_lazy('users:reviews')
 
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
-    model = Reviews
+    model = Review
     template_name = 'users/review_update.html'
     success_url = reverse_lazy('users:reviews')
     fields = ('star_rating', 'text')
