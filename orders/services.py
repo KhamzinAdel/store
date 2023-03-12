@@ -3,6 +3,7 @@ import geocoder
 
 from django.conf import settings
 from django.urls import reverse
+from django.http import HttpRequest
 
 from basket.basket import Basket
 
@@ -13,7 +14,7 @@ def geo_address(address: str) -> list:
     return geo
 
 
-def stripe_api(request, object_id):
+def stripe_api(request: HttpRequest, object_id):
     baskets = Basket(request)
     checkout_session = stripe.checkout.Session.create(
         line_items=baskets.stripe_products(),
@@ -23,5 +24,3 @@ def stripe_api(request, object_id):
         cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order-canceled')),
     )
     return checkout_session
-
-
