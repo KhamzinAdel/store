@@ -87,12 +87,14 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'captcha',
     'snowpenguin.django.recaptcha3',
+    'rest_framework',
 
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'favorites.apps.FavoritesConfig',
     'basket.apps.BasketConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [

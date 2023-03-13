@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('captcha/', include('captcha.urls')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('api/v1/', include('api.urls', namespace='api')),
 ]
 
 urlpatterns += i18n_patterns(
