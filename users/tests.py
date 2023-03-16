@@ -75,3 +75,19 @@ class ReviewViewTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(response.context_data['title'], 'Отзывы')
         self.assertTemplateUsed(response, 'users/reviews.html')
+
+
+class TestLogout(TestCase):
+
+    def setUp(self):
+        self.data = {
+            'first_name': 'Adel', 'last_name': 'Khamzin',
+            'username': 'khamzin', 'email': 'khamzin.adel@mail.ru',
+            'password1': '220602Adel', 'password2': '220602Adel'
+        }
+        self.path = reverse('users:logout')
+
+    def test_logout(self):
+        response = self.client.get(self.path)
+
+        self.assertEqual(response.status_code, 302)
