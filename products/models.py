@@ -1,7 +1,9 @@
 import stripe
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -30,10 +32,21 @@ class ProductCategory(GeneralProduct):
 
 
 class Product(GeneralProduct):
+    MAN = 0
+    WOMEN = 1
+    UNISEX = 2
+    GENDER_CHOICES = (
+        (MAN, 'Мужчина'),
+        (WOMEN, 'Женщина'),
+        (UNISEX, 'Унисекс'),
+    )
+
     price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products_images')
     stripe_product_price_id = models.CharField(max_length=128, null=True, blank=True)
+    season = models.SmallIntegerField(default=2020, validators=[MinValueValidator(2015), MaxValueValidator(2023)])
+    gender = models.SmallIntegerField(default=UNISEX, choices=GENDER_CHOICES)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
 
     class Meta:

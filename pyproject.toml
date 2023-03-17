@@ -29,6 +29,7 @@ django-environ = "^0.10.0"
 django-stubs = "^1.15.0"
 mypy = "^1.1.1"
 djangorestframework = "^3.14.0"
+django-filter = "^22.1"
 
 
 [build-system]

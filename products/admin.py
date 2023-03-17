@@ -14,8 +14,17 @@ class ProductCategoryAdmin(TranslationAdmin):
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
-    list_display = ('name', 'price', 'quantity', 'category', 'get_image')
-    fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category', 'get_image')
+    list_display = ('name', 'price', 'quantity', 'category', 'get_image', 'season', 'gender')
+    fields = (
+        'image',
+        'name', 'description',
+        ('price', 'quantity'),
+        'stripe_product_price_id',
+        'category',
+        'get_image',
+        'season',
+        'gender',
+    )
     readonly_fields = ('description', 'get_image')
     search_fields = ('name',)
     ordering = ('price',)
