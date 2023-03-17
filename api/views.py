@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 
 from products.models import Product
 from products.serializers import ProductSerializer
@@ -18,10 +19,11 @@ class ProductListPagination(PageNumberPagination):
 class ProductListAPIView(ListAPIView):
     serializer_class = ProductSerializer
     pagination_class = ProductListPagination
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('price', 'season', 'gender', 'category')
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')
-        queryset = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+        queryset = Product.objects.all()
         products = cashes_product('products', queryset, 30)
         return products
 
