@@ -4,6 +4,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from products.models import Product
 from products.serializers import ProductSerializer
@@ -19,8 +20,10 @@ class ProductListPagination(PageNumberPagination):
 class ProductListAPIView(ListAPIView):
     serializer_class = ProductSerializer
     pagination_class = ProductListPagination
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filterset_fields = ('price', 'season', 'gender', 'category')
+    search_fields = ('name', 'description')
+    ordering_fields = ('name', 'price')
 
     def get_queryset(self):
         queryset = Product.objects.all()
