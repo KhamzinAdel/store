@@ -2,12 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
 
-from products.models import Product
-from products.serializers import ProductSerializer
+from products.models import Product, ProductCategory
+from products.serializers import ProductSerializer, ProductCategorySerializer
 from products.services import cashes_product
 
 
@@ -37,3 +37,12 @@ class ProductDetailAPIView(APIView):
         product = get_object_or_404(Product, pk=pk)
         serializers = ProductSerializer(product)
         return Response(serializers.data)
+
+
+class ProductCategoryListAPIView(ListAPIView):
+    serializer_class = ProductCategorySerializer
+
+    def get_queryset(self):
+        queryset = ProductCategory.objects.values('id', 'name')
+        categories = cashes_product('categories', queryset, 30)
+        return categories
