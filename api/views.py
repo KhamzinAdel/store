@@ -1,9 +1,6 @@
-from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
-from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 
 from products.models import Product, ProductCategory
@@ -31,12 +28,9 @@ class ProductListAPIView(ListAPIView):
         return products
 
 
-class ProductDetailAPIView(APIView):
-
-    def get(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
-        serializers = ProductSerializer(product)
-        return Response(serializers.data)
+class ProductDetailAPIView(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 class ProductCategoryListAPIView(ListAPIView):
