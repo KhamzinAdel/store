@@ -5,7 +5,7 @@
 получайте от нас последние новости и обновления.</p>
 <form action="{% url 'users:mailing' %}" method="post" class="w3layouts-newsletter">
     {% csrf_token %}
-    {{ mailing_form }}
+    {{ mailing_form.email }}
     <button class="btn1 btn"><span class="fa fa-paper-plane-o white" aria-hidden="true"></span>
     </button>
 </form>

@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<form action="{% url 'basket:coupon' %}" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label class="small mb-1" for={{ form.code.id_for_label }}>Купон</label>
+                      {{ form.code }}
+                  </div>
+              </div>
+          </div>
+</form>
+
+{% endblock %}
