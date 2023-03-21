@@ -83,7 +83,7 @@ class Review(models.Model):
     name = models.CharField(max_length=100)
     text = models.TextField()
     star_rating = models.ForeignKey('StarRating', on_delete=models.CASCADE)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
