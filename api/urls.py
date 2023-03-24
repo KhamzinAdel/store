@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from . import views_products, views_users
+from . import views_products, views_users, views_orders
 
 app_name = 'api'
 
@@ -14,6 +14,7 @@ urlpatterns = [
     path('product_category/', views_products.ProductCategoryListAPIView.as_view(), name='product_category'),
     path('contact/', views_users.ContactCreateAPIView.as_view(), name='contact'),
     path('mailing/', views_users.MailingCreateAPIView.as_view(), name='mailing'),
+    path('orders/', views_orders.OrderListAPIView.as_view(), name='order'),
 ]
 
 urlpatterns += router.urls
