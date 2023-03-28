@@ -14,6 +14,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from products.views import IndexView
+from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +35,8 @@ urlpatterns += i18n_patterns(
     path('products/', include('products.urls', namespace='products')),
     path('basket/', include('basket.urls', namespace='basket')),
 )
+
+urlpatterns += doc_urls
 
 if settings.DEBUG:
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))

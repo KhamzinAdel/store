@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     'snowpenguin.django.recaptcha3',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
 
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
