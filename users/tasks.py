@@ -1,8 +1,10 @@
 from django.core.mail import send_mail
+
 from store.celery import app
 
-from .services import email_send_mailing, email_contact, logic_send_email_verification
 from .models import Mailing
+from .services import (email_contact, email_send_mailing,
+                       logic_send_email_verification)
 
 
 @app.task

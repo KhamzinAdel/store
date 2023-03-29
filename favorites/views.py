@@ -1,11 +1,12 @@
-from django.shortcuts import redirect
-from django.views.generic.list import ListView
-from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.views import View
+from django.views.generic.list import ListView
 
-from products.models import Product
-from .favorite import Favorites
 from common.views import TitleMixin
+from products.models import Product
+
+from .favorite import Favorites
 
 
 class FavoriteListView(TitleMixin, LoginRequiredMixin, ListView):

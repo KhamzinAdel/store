@@ -1,11 +1,12 @@
-from rest_framework.generics import CreateAPIView
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
-from users.serializers import ReviewSerializer, ContactSerializer, MailingSerializer
 from users.models import Review
 from users.permissions import IsOwnerOrStaffOrReadOnly
+from users.serializers import (ContactSerializer, MailingSerializer,
+                               ReviewSerializer)
 
 
 class ReviewViewSet(ModelViewSet):

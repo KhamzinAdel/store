@@ -1,6 +1,7 @@
 from django.db import models
 
 from users.models import User
+
 from .services import geo_address
 
 

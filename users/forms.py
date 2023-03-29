@@ -4,10 +4,9 @@ from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)
 from django.forms import ModelForm
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
-from .tasks import send_email_verification
 
-from .models import (Contact, Mailing, Review, StarRating,
-                     User)
+from .models import Contact, Mailing, Review, StarRating, User
+from .tasks import send_email_verification
 
 
 class UserLoginForm(AuthenticationForm):

@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.timezone import now
 
-from users.models import User, EmailVerification
+from users.models import EmailVerification, User
 
 
 def email_contact(**kwargs: dict[str, str]):

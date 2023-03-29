@@ -1,5 +1,5 @@
-from django.utils import timezone
 from django.http import HttpRequest
+from django.utils import timezone
 
 from .models import Coupon
 

@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.conf import settings
 
 from products.models import Product
+
 from .models import Coupon
 
 

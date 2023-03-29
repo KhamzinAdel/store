@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from .models import Review, Contact, Mailing
 from users.tasks import send_email_contact, send_spam_email
+
+from .models import Contact, Mailing, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):

@@ -1,9 +1,9 @@
-import stripe
 import geocoder
+import stripe
 
 from django.conf import settings
-from django.urls import reverse
 from django.http import HttpRequest
+from django.urls import reverse
 
 from basket.basket import Basket
 

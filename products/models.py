@@ -1,9 +1,9 @@
 import stripe
 
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 

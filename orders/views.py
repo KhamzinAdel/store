@@ -1,6 +1,6 @@
+import stripe
 from http import HTTPStatus
 
-import stripe
 from django.conf import settings
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -33,8 +33,7 @@ class OrderListView(TitleMixin, ListView):
     ordering = ('-created',)
 
     def get_queryset(self):
-        return Order.objects.all() if self.request.user.is_superuser else \
-            Order.objects.filter(initiator=self.request.user)
+        return Order.objects.filter(initiator=self.request.user)
 
 
 class OrderCreateView(TitleMixin, CreateView):

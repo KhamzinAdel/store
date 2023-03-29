@@ -1,10 +1,10 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.filters import SearchFilter, OrderingFilter
-from django_filters.rest_framework import DjangoFilterBackend
 
 from products.models import Product, ProductCategory
-from products.serializers import ProductSerializer, ProductCategorySerializer
+from products.serializers import ProductCategorySerializer, ProductSerializer
 from products.services import cashes_product
 
 

@@ -13,7 +13,7 @@ from .forms import (ContactForm, MailingForm, ReviewsForm, UserLoginForm,
                     UserProfileForm, UserRegistrationForm)
 from .models import (Contact, EmailVerification, Mailing, Review, StarRating,
                      User)
-from .tasks import send_spam_email, send_email_contact
+from .tasks import send_email_contact, send_spam_email
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -87,7 +87,7 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
         context = super().get_context_data(**kwargs)
         star_rating = self.kwargs.get('star_rating')
         context['count_review'] = Review.objects.annotate(Count('name'))
-        context['stars_rating'] = StarRating.objects.all()
+        context['stars_rating'] = StarRating.objects.values('id', 'value')
         context['reviews'] = Review.objects.filter(star_rating=star_rating) if star_rating else Review.objects.all()
         return context
 
