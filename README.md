@@ -1,9 +1,9 @@
 # Store - интернет магазин
-_____
-<img src="media/github_media/Store_picture.jpg">
+
+<img src="https://blog.usetada.com/hubfs/Tips%20to%20Increase%20Repeat%20Purchase%20%281%29.jpg">
 
 ## Инструменты
-_____
+
 * Python
 * Django Rest Framework
 * PostgreSQL
@@ -47,4 +47,3 @@ _____
 </details>
 
 ## Старт
-_____
