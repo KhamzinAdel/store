@@ -1,6 +1,6 @@
 # Store - интернет магазин
 
-<img src="media/github_media/Store_picture.jpg">
+<img src="https://blog.usetada.com/hubfs/Tips%20to%20Increase%20Repeat%20Purchase%20%281%29.jpg">
 
 ## Инструменты
 
