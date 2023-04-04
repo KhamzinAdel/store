@@ -14,8 +14,7 @@ urlpatterns = [
     path('product_category/', views_products.ProductCategoryListAPIView.as_view(), name='product_category'),
     path('contact/', views_users.ContactCreateAPIView.as_view(), name='contact'),
     path('mailing/', views_users.MailingCreateAPIView.as_view(), name='mailing'),
-    path('order_list/', views_orders.OrderListAPIView.as_view(), name='order_list'),
-    path('order_create/', views_orders.OrderCreateAPIView.as_view(), name='order_create'),
+    path('order/', views_orders.OrderListCreateAPIView.as_view(), name='order'),
 ]
 
 urlpatterns += router.urls

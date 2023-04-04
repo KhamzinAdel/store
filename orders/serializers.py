@@ -3,7 +3,7 @@ from rest_framework import serializers
 from orders.models import Order
 
 
-class OrderListSerializers(serializers.ModelSerializer):
+class OrderListSerializer(serializers.ModelSerializer):
     status = serializers.CharField(source='get_status_display')
 
     class Meta:
@@ -11,7 +11,7 @@ class OrderListSerializers(serializers.ModelSerializer):
         fields = ('id', 'email', 'created', 'status')
 
 
-class OrderCreateSerializers(serializers.ModelSerializer):
+class OrderCreateSerializer(serializers.ModelSerializer):
     initiator = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
     class Meta:
