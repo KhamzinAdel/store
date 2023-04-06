@@ -32,6 +32,7 @@ djangorestframework = "^3.14.0"
 django-filter = "^22.1"
 djangorestframework-simplejwt = "4.7.1"
 drf-yasg = "^1.21.5"
+djoser = "^2.1.0"
 
 
 [build-system]
