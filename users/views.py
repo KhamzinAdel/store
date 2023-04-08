@@ -88,7 +88,8 @@ class ReviewView(TitleMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView
         star_rating = self.kwargs.get('star_rating')
         context['count_review'] = Review.objects.annotate(Count('name'))
         context['stars_rating'] = StarRating.objects.values('id', 'value')
-        context['reviews'] = Review.objects.filter(star_rating=star_rating) if star_rating else Review.objects.all()
+        context['reviews'] = Review.objects.filter(star_rating=star_rating).select_related('star_rating', 'user') \
+            if star_rating else Review.objects.all().select_related('star_rating', 'user')
         return context
 
     def form_valid(self, form):

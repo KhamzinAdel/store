@@ -33,7 +33,7 @@ class OrderListView(TitleMixin, ListView):
     ordering = ('-created',)
 
     def get_queryset(self):
-        return Order.objects.filter(initiator=self.request.user)
+        return Order.objects.filter(initiator=self.request.user).select_related('initiator')
 
 
 class OrderCreateView(TitleMixin, CreateView):

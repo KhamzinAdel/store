@@ -22,13 +22,14 @@ class ProductsListView(TitleMixin, ListView):
 
     def get_queryset(self):
         category_id = self.kwargs.get('category_id')
-        queryset = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+        queryset = Product.objects.filter(category_id=category_id).select_related('category') \
+            if category_id else Product.objects.all().select_related('category')
         products = cashes_product('products', queryset, 30)
         return products
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        queryset = ProductCategory.objects.all()
+        queryset = ProductCategory.objects.values('id', 'name')
         categories = cashes_product('categories', queryset, 30)
         context['categories'] = categories
         return context
