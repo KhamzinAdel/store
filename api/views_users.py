@@ -10,7 +10,7 @@ from users.serializers import (ContactSerializer, MailingSerializer,
 
 
 class ReviewViewSet(ModelViewSet):
-    queryset = Review.objects.all()
+    queryset = Review.objects.all().select_related('star_rating', 'user')
     serializer_class = ReviewSerializer
     permission_classes = (IsOwnerOrStaffOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)

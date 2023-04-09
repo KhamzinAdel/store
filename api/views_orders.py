@@ -9,7 +9,7 @@ class OrderListCreateAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Order.objects.filter(initiator=self.request.user)
+        return Order.objects.filter(initiator=self.request.user).select_related('initiator')
 
     def perform_create(self, serializer):
         serializer.save(initiator=self.request.user)
