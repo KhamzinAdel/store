@@ -1,6 +1,6 @@
-import stripe
 from http import HTTPStatus
 
+import stripe
 from django.conf import settings
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse_lazy

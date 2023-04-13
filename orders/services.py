@@ -1,6 +1,5 @@
 import geocoder
 import stripe
-
 from django.conf import settings
 from django.http import HttpRequest
 from django.urls import reverse
