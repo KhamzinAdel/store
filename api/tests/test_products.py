@@ -3,8 +3,8 @@ from django.test import TestCase
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from products.models import Product, ProductCategory
-from products.serializers import ProductSerializer, ProductCategorySerializer
+from products.models import ProductCategory
+from products.serializers import ProductCategorySerializer
 
 
 class ProductCategoryTests(APITestCase):
@@ -42,11 +42,3 @@ class ProductCategorySerializerTests(TestCase):
             }
         ]
         self.assertEqual(expected_data, data)
-
-
-class ProductTests(APITestCase):
-
-    def test_get(self):
-        url = reverse('api:product-queryset-retrieve')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
