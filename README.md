@@ -47,3 +47,16 @@
 </details>
 
 ## Старт
+
+#### Запустить сервер
+
+    docker-compose build
+    docker-compose up
+
+    or
+
+    docker-compose up --build
+
+#### Создать пользователя
+
+    docker-compose run web python manage.py createsuperuser

@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=database
+      - DB_NAME=dbpostgres
+      - DB_USER=dbuser
+      - DB_PASS=dbpassword
+
+    command: >
+      sh -c "python manage.py makemigrations --noinput && 
+      python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+
+    depends_on:
+      - database
+
+    restart: always
+
+  database:
+    image: postgres:11.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=dbpostgres
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=dbpassword
+
+    restart: always
+
+volumes:
+  postgres_data:
