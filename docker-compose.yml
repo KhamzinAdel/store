@@ -19,7 +19,6 @@ services:
 
     depends_on:
       - database
-
     restart: always
 
   database:
@@ -30,8 +29,45 @@ services:
       - POSTGRES_DB=dbpostgres
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=dbpassword
-
     restart: always
+
+  redis:
+    image: redis:7.0.5-alpine
+    ports:
+      - "6379:6379"
+    restart: always
+
+  worker:
+    build:
+      context: .
+    volumes:
+      - ./store:/store
+    depends_on:
+      - redis
+      - web
+    command: celery -A celery.app worker -l info
+    restart: always
+
+  beat:
+    build:
+      context: .
+    volumes:
+      - ./store:/store
+    depends_on:
+      - redis
+      - web
+      - worker
+    command: celery -A celery.app beat -l info
+    restart: always
+
+  flower:
+    build:
+      context: .
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"
+    command: celery -A celery.app flower
 
 volumes:
   postgres_data:

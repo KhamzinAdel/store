@@ -7,9 +7,9 @@ RUN pip install poetry==1.3.2 && poetry config virtualenvs.create false
 
 WORKDIR /store
 
-COPY . .
 COPY pyproject.toml .
 COPY poetry.lock .
 RUN poetry install
+COPY . .
 
 EXPOSE 8000
