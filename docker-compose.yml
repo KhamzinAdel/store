@@ -11,12 +11,10 @@ services:
       - DB_NAME=dbpostgres
       - DB_USER=dbuser
       - DB_PASS=dbpassword
-
     command: >
       sh -c "python manage.py makemigrations --noinput && 
       python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
-
     depends_on:
       - database
     restart: always
@@ -40,24 +38,24 @@ services:
   worker:
     build:
       context: .
-    volumes:
-      - ./store:/store
     depends_on:
       - redis
       - web
-    command: celery -A celery.app worker -l info
+    command: celery -A store worker -l INFO -P solo
+    environment:
+      - PYTHONPATH=/app/store
     restart: always
 
   beat:
     build:
       context: .
-    volumes:
-      - ./store:/store
     depends_on:
       - redis
       - web
       - worker
-    command: celery -A celery.app beat -l info
+    command: celery -A store beat -l INFO
+    environment:
+      - PYTHONPATH=/app/store
     restart: always
 
   flower:
@@ -67,7 +65,9 @@ services:
       - redis
     ports:
       - "5555:5555"
-    command: celery -A celery.app flower
+    command: celery -A store flower --port=5555
+    environment:
+      - PYTHONPATH=/app/store
 
 volumes:
   postgres_data:
