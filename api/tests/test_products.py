@@ -1,7 +1,7 @@
-from django.urls import reverse
 from django.test import TestCase
-from rest_framework.test import APITestCase
+from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 from products.models import ProductCategory
 from products.serializers import ProductCategorySerializer
