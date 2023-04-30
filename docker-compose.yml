@@ -14,10 +14,20 @@ services:
     command: >
       sh -c "python manage.py makemigrations --noinput && 
       python manage.py migrate
-      && python manage.py runserver 0.0.0.0:8000"
+      && gunicorn --bind 0.0.0.0:8000 store.wsgi:application"
     depends_on:
       - database
+      - nginx
     restart: always
+
+  nginx:
+    image: nginx:1.21-alpine
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
   database:
     image: postgres:11.1-alpine
