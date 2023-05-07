@@ -13,7 +13,6 @@ COPY poetry.lock .
 RUN poetry install
 COPY . .
 
-RUN rm -r nginx
 RUN python manage.py collectstatic --no-input
 
 EXPOSE 8000
